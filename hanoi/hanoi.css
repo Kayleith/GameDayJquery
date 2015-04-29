@@ -1,0 +1,84 @@
+body, header, h1, section, article, div {
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  font:inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+
+  background: transparent;
+}
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+body{
+  text-align: center;
+  font: sans-serif;
+}
+
+h1{
+  font-size: 60px;
+}
+
+.gameboard {
+  display: block;
+  margin: auto;
+  height: 210px;
+  width: 450px;
+  border: 5px solid #000;
+}
+
+.gameboard section {
+  float:left;
+  width: 148px;
+  height: 210px;
+  border: 1px solid #000;
+}
+
+.block1 {
+  display: block;
+  height: 70px;
+  width: 33%;
+  margin: auto;
+  background: red;
+}
+
+.block2 {
+  display: block;
+  height: 70px;
+  width: 66%;
+  margin: auto;
+  background: green;
+}
+
+.block3 {
+  display: block;
+  height: 70px;
+  width: 100%;
+  margin: auto;
+  background: blue;
+}
+
+div {
+  display:block;
+  width: 0;
+  height: 70px;
+  margin: auto;
+  background: white;
+}
+
+.chosen {
+  background: yellow;
+}
+
+small {
+  display: block;
+  margin: 50px auto;
+  font-size: 60px;
+  text-align:center;
+}

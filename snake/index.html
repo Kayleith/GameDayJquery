@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <script src="coords.js"></script>
+    <script src="snake.js"></script>
+    <script src="board.js"></script>
+    <script src="view.js"></script>
+    <script src="jquery-2.1.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="snake.css">
+    <title>Snake</title>
+  </head>
+  <body>
+    <h1>Snake Game</h1>
+    <article class="grid group">
+    </article>
+  </body>
+  <script type="text/javascript">
+    var $el = $(".grid");
+    var game = new Game.View($el);
+    setInterval(function() {
+      game.render();
+      game.update();
+      }, 20);
+  </script>
+</html>
