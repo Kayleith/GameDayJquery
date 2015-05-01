@@ -16,9 +16,12 @@
   <script type="text/javascript">
     var $el = $(".grid");
     var game = new Game.View($el);
-    setInterval(function() {
+    var id = setInterval(function() {
+      game.addApple();
       game.render();
-      game.update();
+      if(game.update() === true) {
+        clearInterval(id);
+      }
       }, 20);
   </script>
 </html>

@@ -9,24 +9,56 @@
     "W": new Game.Coord(0, -1),
     "E": new Game.Coord(0, 1)
   };
+  var snakeBody = Game.snakeBody = function(pos) {
+    this.pos = pos;
+  }
 
   var Snake = Game.Snake = function(board, length, pos) {
     this.board = board;
     this.body = new Array();
-    this.dir = DIR["E"];
-    this.body.push(pos);
-    this.body.push(pos.plus(this.dir));
+    this.dir = DIR["W"];
+    this.body.push(new snakeBody(pos));
+    this.body.push(new snakeBody(pos.plus(DIR["E"])));
   };
 
   Snake.prototype.move = function () {
-    tail = this.body.pop();
-    this.body.unshift(this.body[0].plus(this.dir));
+    var head = this.body[0].pos.plus(this.dir);
+    switch(this.checkCollision(head))
+    {
+      case 0:
+        return true;
+      case 1:
+        var tail = this.body.pop();
+        break;
+      case 2:
+        var tail = this.board.board[head.pos[0]][head.pos[1]];
+    }
+    this.body.unshift(new snakeBody(head));
     this.board.updateBoard(tail);
+    return false;
   };
 
   Snake.prototype.turn = function (newDir) {
     if (!this.dir.isOpposite(newDir)) {
       this.dir = newDir;
     }
+  };
+
+  Snake.prototype.checkCollision = function (otherPos) {
+    var row = otherPos.pos[0];
+    var col = otherPos.pos[1];
+    if(row < 0 || row >= this.board.board.length || col < 0 || col >= this.board.board[0].length) {
+      return 0;
+    }
+    if(this.board.board[row][col] !== undefined)
+    {
+      if(this.board.board[row][col] instanceof snakeBody) {
+        return 0;
+      } else if(this.board.board[row][col] instanceof Game.Apple) {
+        // this.board.removeApple(row, col);
+        return 2;
+      }
+    }
+    return 1;
   };
 })();

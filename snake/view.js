@@ -52,6 +52,10 @@
   };
 
   View.prototype.update = function () {
-    this.board.snake.move();
+    return this.board.snake.move();
+  };
+
+  View.prototype.addApple = function () {
+    this.board.addApple();
   };
 })();
