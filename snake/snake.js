@@ -13,7 +13,8 @@
     this.pos = pos;
   }
 
-  var Snake = Game.Snake = function(board, length, pos) {
+  var Snake = Game.Snake = function(board, length, pos, $document) {
+    this.$display = $document;
     this.board = board;
     this.body = new Array();
     this.dir = DIR["W"];
@@ -26,12 +27,14 @@
     switch(this.checkCollision(head))
     {
       case 0:
+        debugger;
         return true;
       case 1:
         var tail = this.body.pop();
         break;
       case 2:
-        var tail = this.board.board[head.pos[0]][head.pos[1]];
+        var tail = null;
+        break;
     }
     this.body.unshift(new snakeBody(head));
     this.board.updateBoard(tail);
@@ -55,10 +58,18 @@
       if(this.board.board[row][col] instanceof snakeBody) {
         return 0;
       } else if(this.board.board[row][col] instanceof Game.Apple) {
-        // this.board.removeApple(row, col);
+        this.board.removeApple(row, col);
         return 2;
       }
     }
     return 1;
+  };
+
+  Snake.prototype.render = function () {
+    for (var i = 0; i < this.body.length; i++) {
+      var x = this.body[i].pos.pos[0];
+      var y = this.body[i].pos.pos[1];
+      $($(this.$display.children()[x]).children()[y]).addClass("snake");
+    }
   };
 })();

@@ -4,7 +4,7 @@
   }
 
   var View = Game.View = function ($el) {
-    this.board = new Game.Board();
+    this.board = new Game.Board($el);
     this.$display = $el;
     for (var i = 0; i < 60; i++) {
       this.$display.append("<ul class='row'></ul>");
@@ -48,14 +48,17 @@
   };
 
   View.prototype.render = function () {
-    this.board.render(this.$display);
+    this.board.render();
   };
 
   View.prototype.update = function () {
+    this.addItems();
+    this.render();
     return this.board.snake.move();
+
   };
 
-  View.prototype.addApple = function () {
-    this.board.addApple();
+  View.prototype.addItems = function () {
+    this.board.addItems();
   };
 })();

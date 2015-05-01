@@ -14,11 +14,10 @@
     </article>
   </body>
   <script type="text/javascript">
+
     var $el = $(".grid");
     var game = new Game.View($el);
     var id = setInterval(function() {
-      game.addApple();
-      game.render();
       if(game.update() === true) {
         clearInterval(id);
       }
