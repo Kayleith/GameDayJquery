@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" type="text/css" href="../css/ttt.css">
+  </head>
+  <body>
+    <script src="../js/jquery-2.1.1.js"></script>
+    <!-- Whackjobs at GithubPages don't understand symlinks... -->
+    <script src="../../ttt-core-solution/ttt-core.js"></script>
+    <script src="../js/ttt-view.js"></script>
+    <header>
+      Tic Tac Toe!
+    </header>
+    <ul class="grid group">
+      <li></li>
+      <li></li>
+      <li></li>
+
+      <li></li>
+      <li></li>
+      <li></li>
+
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <script>
+    $(function () {
+      var game = new TTT.Game();
+      var $grid = $(".grid");
+      var view = new TTT.View(game, $grid);
+      view.bindEvents();
+    });
+    </script>
+  </body>
+</html>
