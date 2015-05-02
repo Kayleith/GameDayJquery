@@ -13,13 +13,27 @@
     this.pos = pos;
   }
 
-  var Snake = Game.Snake = function(board, length, pos, $document) {
+  var Snake = Game.Snake = function(board, length, pos, $document, player) {
     this.$display = $document;
     this.board = board;
     this.body = new Array();
-    this.dir = DIR["W"];
     this.body.push(new snakeBody(pos));
-    this.body.push(new snakeBody(pos.plus(DIR["E"])));
+    this.player = player;
+    switch(this.player)
+    {
+      case 1:
+        this.dir = DIR["E"];
+        // for (var i = 1; i <0 length; i++) {
+        //   var newPos = pos.plus(DIR["W");
+        //   for (var j = 1;  j <= i; j++) {
+          this.body.push(new snakeBody(pos.plus(DIR["W"])));
+        //   }
+        // }
+        break;
+      case 2:
+        this.dir = DIR["W"];
+        this.body.push(new snakeBody(pos.plus(DIR["E"])));
+    }
   };
 
   Snake.prototype.move = function () {
@@ -27,7 +41,6 @@
     switch(this.checkCollision(head))
     {
       case 0:
-        debugger;
         return true;
       case 1:
         var tail = this.body.pop();
@@ -69,7 +82,7 @@
     for (var i = 0; i < this.body.length; i++) {
       var x = this.body[i].pos.pos[0];
       var y = this.body[i].pos.pos[1];
-      $($(this.$display.children()[x]).children()[y]).addClass("snake");
+      $($(this.$display.children()[x]).children()[y]).addClass("snake" + this.player);
     }
   };
 })();

@@ -7,6 +7,8 @@
   MAXX = 60;
   MAXY = 60;
   SNAKEPOS = new Game.Coord(Math.floor(MAXX/2), Math.floor(MAXY/2));
+  SNAKEPOS1 = new Game.Coord(Math.floor(4), Math.floor(4));
+  SNAKEPOS2 = new Game.Coord(Math.floor(MAXX - 5), Math.floor(MAXY - 5));
 
   var Board = Game.Board = function($document) {
     this.$display = $document;
@@ -15,7 +17,8 @@
       this.board[row] = new Array(MAXY);
     }
     this.generatePortal();
-    this.snake = new Game.Snake(this, SNAKESIZE, SNAKEPOS, $document);
+    this.snake1 = new Game.Snake(this, SNAKESIZE, SNAKEPOS1, $document, 1);
+    this.snake2 = new Game.Snake(this, SNAKESIZE, SNAKEPOS2, $document, 2);
   };
 
   Board.prototype.updateBoard = function (tail) {
@@ -23,18 +26,24 @@
       var x = tail.pos.pos[0];
       var y = tail.pos.pos[1];
       this.board[x][y] = undefined;
-      $($(this.$display.children()[x]).children()[y]).removeClass("snake");
+      $($(this.$display.children()[x]).children()[y]).removeClass("snake1 snake2");
     }
 
-    for (var i = 0; i < this.snake.body.length; i++) {
-      var row = this.snake.body[i].pos.pos[0];
-      var col = this.snake.body[i].pos.pos[1];
-      this.board[row][col] = this.snake.body[i];
+    for (var i = 0; i < this.snake1.body.length; i++) {
+      var row = this.snake1.body[i].pos.pos[0];
+      var col = this.snake1.body[i].pos.pos[1];
+      this.board[row][col] = this.snake1.body[i];
+    }
+    for (var i = 0; i < this.snake2.body.length; i++) {
+      var row = this.snake2.body[i].pos.pos[0];
+      var col = this.snake2.body[i].pos.pos[1];
+      this.board[row][col] = this.snake2.body[i];
     }
   };
 
   Board.prototype.render = function () {
-    this.snake.render();
+    this.snake1.render();
+    this.snake2.render();
   };
 
   var Apple = Game.Apple = function(pos) {

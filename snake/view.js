@@ -26,20 +26,37 @@
     $(document).on("keydown", function(e) {
       switch(e.which) {
         case 37: // left
-          this.board.snake.turn(DIR["W"]);
+          this.board.snake2.turn(DIR["W"]);
         break;
 
         case 38: // up
-          this.board.snake.turn(DIR["N"]);
+          this.board.snake2.turn(DIR["N"]);
         break;
 
         case 39: // right
-          this.board.snake.turn(DIR["E"]);
+          this.board.snake2.turn(DIR["E"]);
         break;
 
         case 40: // down
-          this.board.snake.turn(DIR["S"]);
+          this.board.snake2.turn(DIR["S"]);
         break;
+
+        case 65: // left
+          this.board.snake1.turn(DIR["W"]);
+        break;
+
+        case 87: // up
+          this.board.snake1.turn(DIR["N"]);
+        break;
+
+        case 68: // right
+          this.board.snake1.turn(DIR["E"]);
+        break;
+
+        case 83: // down
+          this.board.snake1.turn(DIR["S"]);
+        break;
+
 
         default: return;
     }
@@ -54,8 +71,9 @@
   View.prototype.update = function () {
     this.addItems();
     this.render();
-    return this.board.snake.move();
-
+    var snake1 = this.board.snake1.move()
+    var snake2 = this.board.snake2.move();
+    return snake1 || snake2;
   };
 
   View.prototype.addItems = function () {

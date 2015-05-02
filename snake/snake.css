@@ -48,13 +48,16 @@ h1{
 .grid > ul > li {
   display: block;
   float: left;
-  width: 8px;
-  height: 8px;
-  border: 1px solid black;
+  width: 10px;
+  height: 10px;
 }
 
-.snake {
+.snake1 {
   background: green;
+}
+
+.snake2 {
+  background: blue;
 }
 
 .portal {
@@ -63,4 +66,7 @@ h1{
 
 .apple {
   background: red;
+  -moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
